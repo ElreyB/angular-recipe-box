@@ -22,7 +22,14 @@ import { Component } from '@angular/core';
       <br>
       <div *ngIf="selectedRecipe" class="well">
         <h3 class="change-color">{{selectedRecipe.title}}</h3>
+        <label>Edit Title:</label>
         <input [(ngModel)]="selectedRecipe.title">
+        <ul>
+        <label>Edit Ingredients:</label>
+          <li *ngFor="let ingredient of selectedRecipe.ingredients; let index = index; trackBy:trackByIndex;">{{ingredient}}
+          <input [(ngModel)]="selectedRecipe.ingredients[index]">
+          </li>
+        </ul>
       </div>
     `,
   styles:[`
@@ -49,6 +56,10 @@ export class AppComponent {
 
   editRecipe(clickedRecipe) {
     this.selectedRecipe = clickedRecipe;
+  }
+
+  trackByIndex(index: number, obj: any): any {
+    return index;
   }
 
 }
