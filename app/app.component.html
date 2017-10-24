@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h1>My Recipe Box</h1>
+</div>
+<ul class="display-recipe">
+  <li *ngFor="let currentRecipe of recipes" class="well">
+  <button (click)="editRecipe(currentRecipe)" type="button" class="btn btn-warning edit-button" aria-label="Left Align">
+    <span class="input-group-addon" id="basic-addon3">Edit</span>
+  </button>
+    <h3 class="change-size">{{currentRecipe.title}}</h3>
+    <ul>
+      <li *ngFor="let ingredient of currentRecipe.ingredients">{{ingredient}}</li>
+    </ul>
+    <br>
+    <p>{{currentRecipe.directions}}</p>
+  </li>
+</ul>
+<br>
+<div *ngIf="selectedRecipe" class="well">
+  <h2>Edit Recipe:</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="well">
+        <h2>Title</h2>
+        <p class="edit-title">{{selectedRecipe.title}}</p>
+        <input [(ngModel)]="selectedRecipe.title" class="form-control">
+      </div>
+      <ul class="well">
+        <h2>Ingredients</h2>
+        <li *ngFor="let ingredient of selectedRecipe.ingredients; let index = index; trackBy:trackByIndex;">{{ingredient}}
+        <input [(ngModel)]="selectedRecipe.ingredients[index]" class="form-control">
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <div class="well">
+        <h2>Directions</h2>
+        <p class="justify-directions">{{selectedRecipe.directions}}</p>
+        <textarea [(ngModel)]="selectedRecipe.directions" rows="10" cols="53"></textarea>
+      </div>
+    </div>
+  </div>
+  <button (click)="finishedEditing()" class="btn btn-lg btn-block ">Done</button>
+</div>
